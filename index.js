@@ -1,0 +1,48 @@
+const memoize = require('./memoize');
+const Functor = require('./functor');
+const Maybe = require('./maybe');
+const Either = require('./either');
+
+//memoize
+const addNumbers = (a, b) => a + b;
+
+const memoizedAdd = memoize(addNumbers);
+
+console.log(memoizedAdd(1, 2));
+console.log(memoizedAdd(1, 2));
+
+//Functor
+console.log(
+  Functor.of(1)
+    .map(x => x + 12)
+    .map(x => x - 2)
+    .join()
+);
+
+//Maybe monad
+console.log(
+  Maybe.of(2)
+    .map(x => x + 2)
+    .map(x => x + 1)
+    .getOrDefault('def val')
+);
+
+console.log(
+  Maybe.of(null)
+    .map(x => x + 2)
+    .getOrDefault('def val')
+);
+
+//Either monad
+const cannotBeGreaterThanTen = number =>
+  number > 10
+    ? Either.left(new Error('greater than then 10'))
+    : Either.right(number);
+
+
+const error = error => console.log(error.message);
+const success = value => console.log(value);
+
+Either.either(success, error)(cannotBeGreaterThanTen(8))
+
+Either.either(success, error)(cannotBeGreaterThanTen(11))
