@@ -3,6 +3,7 @@ const Functor = require('./functor');
 const Maybe = require('./maybe');
 const Either = require('./either');
 const IO = require('./io');
+const Fold = require('./fold');
 
 //Memoize
 const addNumbers = (a, b) => a + b;
@@ -56,3 +57,6 @@ new IO(() => 'hi there')
   .map(upperCase)
   .flatMap(logger)
   .execute();
+
+//Fold
+console.log(new Fold([1, 2, 3, 4, 5]).reduce((sum, item) => sum + item, 0));
