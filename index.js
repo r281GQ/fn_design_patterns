@@ -2,8 +2,9 @@ const memoize = require('./memoize');
 const Functor = require('./functor');
 const Maybe = require('./maybe');
 const Either = require('./either');
+const IO = require('./io');
 
-//memoize
+//Memoize
 const addNumbers = (a, b) => a + b;
 
 const memoizedAdd = memoize(addNumbers);
@@ -39,10 +40,19 @@ const cannotBeGreaterThanTen = number =>
     ? Either.left(new Error('greater than then 10'))
     : Either.right(number);
 
-
 const error = error => console.log(error.message);
 const success = value => console.log(value);
 
-Either.either(success, error)(cannotBeGreaterThanTen(8))
+Either.either(success, error)(cannotBeGreaterThanTen(8));
 
-Either.either(success, error)(cannotBeGreaterThanTen(11))
+Either.either(success, error)(cannotBeGreaterThanTen(11));
+
+// //IO monad
+const logger = x => new IO(() => console.log(x));
+
+const upperCase = x => x.toUpperCase();
+
+new IO(() => 'hi there')
+  .map(upperCase)
+  .flatMap(logger)
+  .execute();

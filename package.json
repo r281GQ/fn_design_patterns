@@ -9,6 +9,12 @@
   "author": "Endre Vegh",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^1.11.0"
+    "cheerio": "^1.0.0-rc.2",
+    "monet": "^0.8.10",
+    "nodemon": "^1.11.0",
+    "prompt": "^1.0.0",
+    "prompt-sync": "^4.1.5",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
   }
 }
