@@ -15,6 +15,7 @@ module.exports = function(fn) {
       //or it has less arguments than the original function
       return function() {
         //this case we kepp calling the recursive function with the current and the next arguments combined until we reach the base case
+        //this is possible because closure scoped the current arguments are to the next ones
         return curry.apply(
           null,
           currentArguments.concat(Array.prototype.slice.call(arguments))
