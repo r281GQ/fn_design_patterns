@@ -10,6 +10,7 @@ IO.prototype.toString = function() {
   return this.value.toString();
 };
 
+//extracts the value from the monad, the return value needs to be rewrapped
 IO.prototype.flatMap = function(fn) {
   return new IO(() => fn(this.execute()).execute());
 };

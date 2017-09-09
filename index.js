@@ -4,6 +4,7 @@ const Maybe = require('./maybe');
 const Either = require('./either');
 const IO = require('./io');
 const Fold = require('./fold');
+const curry = require('./curry');
 
 //Memoize
 const addNumbers = (a, b) => a + b;
@@ -48,7 +49,7 @@ Either.either(success, error)(cannotBeGreaterThanTen(8));
 
 Either.either(success, error)(cannotBeGreaterThanTen(11));
 
-// //IO monad
+//IO monad
 const logger = x => new IO(() => console.log(x));
 
 const upperCase = x => x.toUpperCase();
@@ -60,3 +61,11 @@ new IO(() => 'hi there')
 
 //Fold
 console.log(new Fold([1, 2, 3, 4, 5]).reduce((sum, item) => sum + item, 0));
+
+//Curry
+const method = (a, b) => a + b;
+
+const curriedMethod = curry(method);
+const curriedMethodWithFirstArg = curriedMethod(1);
+
+console.log(curriedMethodWithFirstArg(1));

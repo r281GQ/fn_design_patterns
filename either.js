@@ -1,5 +1,7 @@
 const Either = function() {};
 
+//takes two functions as handlers with the value and error as args, then returns a function which expects either a left or right monad
+//based on that value it invokes one of the handlers
 Either.either = function(succesHandler, failureHandler) {
   return function(either) {
     either instanceof Right

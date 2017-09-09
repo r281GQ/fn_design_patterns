@@ -1,5 +1,3 @@
-const Functor = require('./functor');
-
 const Maybe = function(value) {
   if (value === null || typeof value === 'undefined') return new Nothing();
 
@@ -32,10 +30,12 @@ const Nothing = function() {};
 
 Nothing.prototype = Object.create(Maybe.prototype);
 
+//instead of returning a new wrapper aroung the value it return itself
 Nothing.prototype.map = function(fn) {
   return this;
 };
 
+//returns the or value
 Nothing.prototype.getOrDefault = function(or) {
   return or;
 };
